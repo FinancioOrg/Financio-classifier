@@ -14,7 +14,7 @@ def classify_text():
     text = data['text']
     categories = data['categories']
 
-    result = classify_article(text, categories)
+    result = classify_article(text)
 
     # Return predicted category as JSON response
     response = {'category': result['labels'][0]}
