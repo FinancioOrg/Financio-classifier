@@ -1,0 +1,21 @@
+from sentence_transformers import SentenceTransformer, util
+
+# Load pre-trained model
+model = SentenceTransformer('./stsb-roberta-base_offline')
+
+# Define the two sentences that you want to compare
+sentence_1 = "What Are Stocks? A stock, also known as equity, is a security that represents the ownership of a fraction of the issuing corporation. Units of stock are called shares which entitles the owner to a proportion of the corporation's assets and profits equal to how much stock they own. Stocks are bought and sold predominantly on stock exchanges and are the foundation of many individual investors' portfolios. Stock trades have to conform to government regulations meant to protect investors from fraudulent practices. KEY TAKEAWAYS A stock is a form of security that indicates the holder has proportionate ownership in the issuing corporation and is sold predominantly on stock exchanges. Corporations issue stock to raise funds to operate their businesses. There are two main types of stock: common and preferred. Historically, stocks have outperformed most other investments over the long run. 1 Understanding Stocks Corporations issue stock to raise funds to operate their businesses and the holder of stock, a shareholder, may have a claim to part of the company's assets and earnings. A shareholder is considered an owner of the issuing company, determined by the number of shares an investor owns relative to the number of outstanding shares. "
+sentence_2 = "What Is an Option? The term option refers to a financial instrument that is based on the value of underlying securities such as stocks. An options contract offers the buyer the opportunity to buy or sell—depending on the type of contract they hold—the underlying asset. Unlike futures, the holder is not required to buy or sell the asset if they decide against it. Each options contract will have a specific expiration date by which the holder must exercise their option. The stated price on an option is known as the strike price. Options are typically bought and sold through online or retail brokers. KEY TAKEAWAYS Options are financial derivatives that give buyers the right, but not the obligation, to buy or sell an underlying asset at an agreed-upon price and date. Call options and put options form the basis for a wide range of option strategies designed for hedging, income, or speculation. Options trading can be used for both hedging and speculation, with strategies ranging from simple to complex. Although there are many opportunities to profit with options, investors should carefully weigh the risks. 4:23 Option Understanding Options Options are versatile financial products. These contracts involve a buyer and seller, where the buyer pays a premium for the rights granted by the contract. "
+#sentence_2 = "What Is Real Estate? Real estate is defined as the land and any permanent structures, like a home, or improvements attached to the land, whether natural or man-made. Real estate is a form of real property. It differs from personal property, which is not permanently attached to the land, such as vehicles, boats, jewelry, furniture, and farm equipment. KEY TAKEAWAYS Real estate is considered real property that includes land and anything permanently attached to it or built on it, whether natural or man-made. There are five main categories of real estate which include residential, commercial, industrial, raw land, and special use. Investing in real estate includes purchasing a home, rental property, or land. Indirect investment in real estate can be made via REITs or through pooled real estate investment. 1:34 Real Estate Understanding Real Estate The terms land, real estate, and real property are often used interchangeably, but there are distinctions. Land refers to the earth's surface down to the center of the earth and upward to the airspace above, including the trees, minerals, and water. "
+
+
+# Compute embeddings for the sentences
+embeddings = model.encode([sentence_1, sentence_2], convert_to_tensor=True)
+
+# Compute cosine similarity between the embeddings
+cosine_scores = util.pytorch_cos_sim(embeddings[0], embeddings[1])
+similarity_score = cosine_scores.item()
+
+print("Sentence 1:", sentence_1)
+print("Sentence 2:", sentence_2)
+print("Semantic similarity score:", similarity_score)

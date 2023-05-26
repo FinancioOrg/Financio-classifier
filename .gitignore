@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+stsb-roberta-base_offline/
 # C extensions
 *.so
 

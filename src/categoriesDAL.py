@@ -1,7 +1,8 @@
 import pymongo
+import os
 
 def fetch_categories():
-    client = pymongo.MongoClient("mongodb://localhost:27017/")
+    client = pymongo.MongoClient("mongodb+srv://btymofieienko:badN7USHpum3HqV8@cluster0.xkyzxde.mongodb.net/?retryWrites=true&w=majority")
     # Database Name
     db = client["FinancioDB"]
     # Collection Name
