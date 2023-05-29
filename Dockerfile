@@ -1,5 +1,5 @@
 # Base image with CUDA support
-FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu20.04
+FROM python:3.11
 
 # Set working directory
 WORKDIR /app
@@ -17,7 +17,7 @@ COPY src/ requirements.txt ./
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt && \
-    pip install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
+    pip install --no-cache-dir torch torchvision torchaudio 
 
 # Expose Flask port
 EXPOSE 5000
