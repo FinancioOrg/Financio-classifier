@@ -17,7 +17,7 @@ COPY src/ requirements.txt ./
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt && \
-    pip install --no-cache-dir torch torchvision torchaudio 
+    pip install --no-cache-dir torch 
 
 # Expose Flask port
 EXPOSE 5000

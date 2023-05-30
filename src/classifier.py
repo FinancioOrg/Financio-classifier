@@ -3,7 +3,7 @@ from categoriesDAL import fetch_categories
 
 def classify_article(text):
     categories = fetch_categories()
-    pipe = pipeline("zero-shot-classification", model="roberta-large-mnli")
+    pipe = pipeline("zero-shot-classification", model="roberta-large-mnli",device=0)
     result = pipe(text,candidate_labels=categories)
     print(result)
     return result
