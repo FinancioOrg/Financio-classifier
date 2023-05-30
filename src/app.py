@@ -6,6 +6,8 @@ from summarizer import summarize_article
 # Initialize Flask app
 app = Flask(__name__)
 CORS(app)
+pipe = pipeline("zero-shot-classification", model="roberta-large-mnli", device='cpu')
+sum_pipeline = pipeline("summarization",model="sshleifer/distilbart-cnn-12-6", device='cpu')
 
 # Define API endpoint for text classification
 @app.route('/classify', methods=['POST'])
@@ -14,7 +16,7 @@ def classify_text():
     data = request.json
     text = data['text']
 
-    result = classify_article(text)
+    result = classify_article(pipe, text)
 
     # Return predicted category as JSON response
     response = {'category': result['labels'][0]}
@@ -26,7 +28,7 @@ def summarize_text():
     data = request.json
     text = data['text']
 
-    result = summarize_article(text)
+    result = summarize_article(sum_pipeline, text)
 
     # Return predicted category as JSON response
     response = {'summary': result[0]['summary_text']}

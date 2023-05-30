@@ -1,9 +1,8 @@
 from transformers import pipeline
 from categoriesDAL import fetch_categories
 
-def classify_article(text):
+def classify_article(pipe, text):
     categories = fetch_categories()
-    pipe = pipeline("zero-shot-classification", model="roberta-large-mnli", device='cpu')
     result = pipe(text,candidate_labels=categories)
     print(result)
     return result
