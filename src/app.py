@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from classifier import classify_article
 from summarizer import summarize_article
+from transformers import pipeline
+
 
 # Initialize Flask app
 app = Flask(__name__)
